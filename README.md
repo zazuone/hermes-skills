@@ -4,11 +4,16 @@ My custom Hermes Agent skills — shareable across machines via `hermes skills t
 
 ## Skills
 
-| Skill | Description |
-|-------|-------------|
-| **tdd-pro** | Orchestrated TDD workflow — RED-GREEN-REFACTOR + CodeGraph code intelligence + ocr review |
-| **open-code-review** | Use Alibaba's open-code-review (ocr) CLI for AI-powered code review |
-| **codegraph** | Pre-indexed code knowledge graph for AI coding agents via MCP |
+| Skill | When to Use | What It Does |
+|-------|------------|-------------|
+| **tdd-pro** | New features, bug fixes, refactoring | TDD + CodeGraph + ocr review orchestration |
+| **codegraph** | Exploring unfamiliar code, refactoring | Pre-indexed code knowledge graph via MCP |
+| **open-code-review** | Before PR, after changes, "帮我 review" | Alibaba ocr CLI for AI-powered code review |
+| **feishu-doc** | 飞书文档 / feishu doc / lark doc | Create, read, populate Feishu docs via API |
+| **task-file-automation** | 每日任务 / task auto / cron任务 | Nightly cron from Feishu → execute → log |
+| **grill-me** | "Grill me", "stress test" this plan | Interview relentlessly before committing |
+| **handoff** | "Handoff", session summary for next agent | Structured session-to-session handoff doc |
+| **caveman** | "Caveman mode", "be brief", 省 token | Ultra-compressed responses |
 
 ## Usage
 
@@ -16,25 +21,24 @@ My custom Hermes Agent skills — shareable across machines via `hermes skills t
 # Add this repo as a tap source (one-time)
 hermes skills tap add zazuone/hermes-skills
 
-# Install a skill
-hermes skills install tdd-pro
-hermes skills install open-code-review
-hermes skills install codegraph
+# Install skills
+hermes skills install tdd-pro codegraph open-code-review
+hermes skills install grill-me handoff caveman
+hermes skills install feishu-doc task-file-automation
 
 # Or install by full identifier
 hermes skills install zazuone/hermes-skills/skills/tdd-pro
 ```
 
-Then start Hermes with:
-
-```bash
-hermes --skills tdd-pro,open-code-review,codegraph
-```
-
-Or load in-session:
+Then load in-session:
 
 ```
 /skill tdd-pro
-/skill open-code-review
 /skill codegraph
+/skill open-code-review
+/skill grill-me
 ```
+
+## Contributing
+
+See [CLAUDE.md](./CLAUDE.md) — the agent self-maintenance guide.

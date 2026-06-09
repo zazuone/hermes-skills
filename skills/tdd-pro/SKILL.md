@@ -1,6 +1,6 @@
 ---
 name: tdd-pro
-description: Orchestrated TDD workflow — RED-GREEN-REFACTOR augmented with CodeGraph code intelligence and open-code-review (ocr) quality gates. Fewer tokens, fewer bugs, cleaner code.
+description: Use when developing new features, fixing bugs, or doing major refactoring. Orchestrated TDD workflow — RED-GREEN-REFACTOR augmented with CodeGraph code intelligence and open-code-review (ocr) quality gates. Fewer tokens, fewer bugs, cleaner code.
 tags:
   - tdd
   - code-review
@@ -25,14 +25,21 @@ related_skills:
 - `codegraph` — 预建代码知识图谱（代码探索、调用分析）
 - `open-code-review` — AI 代码审查（行级 review、安全/质量检测）
 
-启动时加载：
+### 安装方式
 
+**方式 A：从 GitHub tap 安装（推荐，多机同步）**
+```bash
+hermes skills tap add zazuone/hermes-skills
+hermes skills install tdd-pro
+# tdd-pro 会自动拉取依赖的 codegraph 和 open-code-review
+```
+
+**方式 B：启动时加载**
 ```bash
 hermes --skills test-driven-development,codegraph,open-code-review
 ```
 
-或在 session 中加载：
-
+**方式 C：在 session 中加载**
 ```
 /skill test-driven-development
 /skill codegraph

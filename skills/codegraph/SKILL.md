@@ -1,6 +1,6 @@
 ---
 name: codegraph
-description: Pre-indexed code knowledge graph for AI coding agents — fewer tokens, fewer tool calls, 100% local. Supports Claude Code, Codex, Hermes Agent, Cursor, Gemini, OpenCode, and more via MCP.
+description: Use when exploring an unfamiliar codebase, analyzing call chains, or assessing refactoring impact. Pre-indexed code knowledge graph for AI coding agents — fewer tokens, fewer tool calls, 100% local. Supports Claude Code, Codex, Hermes Agent, Cursor, Gemini, OpenCode, and more via MCP.
 tags:
   - code-intelligence
   - MCP
@@ -44,12 +44,36 @@ npm i -g @colbymchenry/codegraph
 ### 2. Wire up to agents
 
 ```bash
-codegraph install
+codegraph install          # interactive — picks which agents to configure
+codegraph install --yes    # non-interactive — configures all detected agents
 ```
 
 Detects and auto-configures supported agents (including Hermes Agent) — wires the CodeGraph MCP server into each.
 
-### 3. Initialize a project
+### 3. Verify MCP integration
+
+After `codegraph install --yes`, confirm the MCP server was wired into Hermes:
+
+```bash
+grep -A 3 "codegraph" ~/.hermes/config.yaml
+# Should show:
+#   codegraph:
+#     command: codegraph
+#     arguments: [serve, --mcp]
+```
+
+If that section is missing, re-run `codegraph install --yes` or manually add it to `config.yaml` under `mcp_servers:`:
+
+```yaml
+mcp_servers:
+  codegraph:
+    command: codegraph
+    arguments: [serve, --mcp]
+```
+
+Then `/reload-mcp` in-session or start a new Hermes session.
+
+### 4. Initialize a project
 
 ```bash
 cd /path/to/your-project
@@ -90,6 +114,7 @@ Once installed + initialized, CodeGraph runs as an MCP server alongside Hermes. 
 
 ## Pitfalls
 
+- **`codegraph install` is interactive by default** — shows a checkbox UI. In non-interactive terminals (background, scripts, agent-terminal), it exits without configuring anything. Always use `codegraph install --yes` in non-interactive contexts.
 - **Must run `codegraph install` after installing CLI** — the CLI alone isn't connected to agents.
 - **New terminal after install** — the installer puts `codegraph` on PATH but doesn't modify the current shell session. Open a new terminal.
 - **`codegraph init` creates `.codegraph/`** — it's a local project directory, commit it or not as preferred.

@@ -1,6 +1,6 @@
 ---
 name: open-code-review
-description: Use Alibaba's open-code-review (ocr) CLI for AI-powered code review — supports workspace, branch diff, and single commit review.
+description: Use before opening a PR, after large changesets, or when user asks "帮我 review". Alibaba open-code-review (ocr) CLI for AI-powered code review — supports workspace, branch diff, and single commit review.
 tags:
   - code-review
   - github
@@ -85,3 +85,6 @@ Example output typically includes:
 - **No uncommitted changes in branch mode** — when using `--from`/`--to`, make sure the branches exist and are up to date.
 - **LLM must be running** — depends on ccx-go on port 3688. If it's down, `ocr llm test` will fail.
 - **Performance on huge PRs** — very large diff sets (>50 files) take longer but are handled via the bundled sub-agent approach.
+- **`ocr config set` masks auth tokens** — the `ocr config set llm.auth_token` command writes `***` to config.json instead of the actual key. Always write the config file directly (use `write_file` or `cat > ~/.opencodereview/config.json`) to get the real token stored.
+- **All three env vars required** — `OCR_LLM_URL`, `OCR_LLM_MODEL`, and `OCR_LLM_TOKEN` must all be set together. The tool refuses to start if `OCR_LLM_TOKEN` is missing, even for non-Anthropic (OpenAI-compatible) endpoints.
+- **npm install may timeout** — the npm postinstall script downloads a binary from GitHub releases. On slow connections, use direct binary download instead: `curl -L -o /tmp/ocr <release-url> && chmod +x /tmp/ocr && sudo mv /tmp/ocr /usr/local/bin/ocr`.
