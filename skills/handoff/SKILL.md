@@ -3,6 +3,7 @@ name: handoff
 description: Compact the current conversation into a structured handoff document so another agent session can continue the work. Includes context, decisions made, remaining work, and suggested skills. Use when ending a session that others will continue, before delegate_task calls, or when the user says "handoff", "write a handoff", "summarize for next session".
 triggers:
   - handoff
+  - 交接一下
   - write handoff
   - session summary
   - continue later

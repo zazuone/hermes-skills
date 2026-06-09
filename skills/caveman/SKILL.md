@@ -3,6 +3,7 @@ name: caveman
 description: Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler, articles, and pleasantries while keeping full technical accuracy. Use when user says "caveman mode", "be brief", "less tokens", "terse mode", "short mode", "talk like caveman".
 triggers:
   - caveman mode
+  - 少废话
   - be brief
   - less tokens
   - short mode

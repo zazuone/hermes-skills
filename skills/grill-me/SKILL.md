@@ -3,6 +3,7 @@ name: grill-me
 description: Interview the user relentlessly about a plan or design until reaching shared understanding. Resolves branches of the decision tree one by one. Use when user says "grill me", "stress test this", "ask me questions", wants to refine a plan before building, or before writing an implementation plan.
 triggers:
   - grill me
+  - 刨根问底
   - stress test
   - ask me questions
   - refine plan
